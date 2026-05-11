@@ -212,7 +212,14 @@ export default function KanbanBoard({ tasks, onTaskUpdate, onTaskEdit, onTaskDel
 
     // Update task status if it changed
     if (newStatus !== activeTask.status) {
-      onTaskUpdate(activeTask.id, { ...activeTask, status: newStatus });
+      onTaskUpdate(activeTask.id, {
+        title: activeTask.title,
+        description: activeTask.description,
+        status: newStatus,
+        priority: activeTask.priority,
+        assigneeEmail: activeTask.assigneeEmail || null,
+        dueDate: activeTask.dueDate || null,
+      });
     }
   };
 

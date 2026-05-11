@@ -60,9 +60,10 @@ export const projectMembersAPI = {
 
 // Tasks API
 export const tasksAPI = {
-  create: (projectId, title, description, dueDate, status ,priority, assigneeEmail) => 
+  create: (projectId, title, description, dueDate, status, priority, assigneeEmail) =>
     api.post('/tasks', { projectId, title, description, dueDate, status, priority, assigneeEmail }),
   update: (id, data) => api.put(`/tasks/${id}`, data),
+  getMyTasks: () => api.get('/tasks'),
   getByProject: (projectId, status) => {
     const params = status ? { status } : {};
     return api.get(`/tasks/project/${projectId}`, { params });
