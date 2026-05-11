@@ -55,11 +55,6 @@ export default function TaskModal({
       return;
     }
 
-    if (!formData.assigneeEmail || formData.assigneeEmail === 'UNKNOWN') {
-      alert('Please select a valid assignee');
-      return;
-    }
-
     if (!formData.priority) {
       alert('Please select a priority');
       return;
@@ -67,7 +62,10 @@ export default function TaskModal({
 
     const taskData = {
       ...formData,
-      dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : null,
+      assigneeEmail: (!formData.assigneeEmail || formData.assigneeEmail === 'UNASSIGNED')
+        ? null
+        : formData.assigneeEmail,
+      dueDate: formData.dueDate || null,
     };
 
     onSave(taskData);
